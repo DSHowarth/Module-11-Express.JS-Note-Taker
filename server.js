@@ -12,3 +12,8 @@ app.use(express.static('public'));
 app.get('/notes', (req, res) => {
     res.send(path.join(__dirname, 'notes.html'));
 })
+
+app.listen(process.env.PORT || 3001, (err) => {
+    if (err) console.log(err);
+    console.log('Server listeining on ', PORT)
+})
