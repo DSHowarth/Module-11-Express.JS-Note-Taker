@@ -1,6 +1,8 @@
 const express = require('express');
-
+const api = require('./routes/api');
 const app = express();
+
+const PORT = process.env.PORT || 3001;
 
 // redirect api requests to api.js
 app.use('/api/notes', api);
@@ -13,7 +15,7 @@ app.get('/notes', (req, res) => {
     res.send(path.join(__dirname, 'notes.html'));
 })
 
-app.listen(process.env.PORT || 3001, (err) => {
+app.listen(PORT, (err) => {
     if (err) console.log(err);
-    console.log('Server listeining on ', PORT)
+    console.log('Server listeining on ' + PORT)
 })

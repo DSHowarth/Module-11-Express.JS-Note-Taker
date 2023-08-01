@@ -20,3 +20,5 @@ apiRoute.post('/', (req, res) => {
         });
     })
 })
+
+module.exports = apiRoute;
