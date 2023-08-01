@@ -3,20 +3,23 @@ const fs = require('fs');
 
 apiRoute.get('/', (req, res) => {
 
-    fs.readFile('../db/db.json', 'utf8', (data) => {
+    fs.readFile('./db/db.json', 'utf8', (err, data) => {
         res.send(data);
     })
 })
 
 apiRoute.post('/', (req, res) => {
-    
 
-    fs.readFile('../db/db.json', 'utf8', (data) => {
-        console.log(req);
-        const notesDB = JSON.parse(data);
-        notesDB.append(req.body);
-        fs.writeFile('../db/db.json', JSON.stringify(notesDB), (err) => {
-            err ? console.log(err) : console.log('Added note to DB');
+    fs.readFile('./db/db.json', 'utf8', (err, data) => {
+        if (err) {
+            res.json(err);
+        }
+
+        let notesDB = data;
+
+        notesDB += req.body;
+        fs.writeFile('./db/db.json', JSON.stringify(notesDB), (err) => {
+            err ? res.json(err) : res.json('Added note to DB');
         });
     })
 })

@@ -4,6 +4,8 @@ const app = express();
 
 const PORT = process.env.PORT || 3001;
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 // redirect api requests to api.js
 app.use('/api/notes', api);
 
@@ -17,5 +19,5 @@ app.get('/notes', (req, res) => {
 
 app.listen(PORT, (err) => {
     if (err) console.log(err);
-    console.log('Server listeining on ' + PORT)
+    console.log('Server listening on ' + PORT)
 })
