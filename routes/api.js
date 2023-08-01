@@ -14,10 +14,10 @@ apiRoute.post('/', (req, res) => {
         if (err) {
             res.json(err);
         }
+        let notesDB = JSON.parse(data);
 
-        let notesDB = data;
 
-        notesDB += req.body;
+        notesDB.push(req.body);
         fs.writeFile('./db/db.json', JSON.stringify(notesDB), (err) => {
             err ? res.json(err) : res.json('Added note to DB');
         });
