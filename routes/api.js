@@ -1,5 +1,6 @@
 const apiRoute = require('express').Router();
 const fs = require('fs');
+const uuid = require('uuid');
 
 apiRoute.get('/', (req, res) => {
 
@@ -15,7 +16,7 @@ apiRoute.post('/', (req, res) => {
             res.json(err);
         }
         let notesDB = JSON.parse(data);
-
+        req.body.id = uuid.v4()
 
         notesDB.push(req.body);
         fs.writeFile('./db/db.json', JSON.stringify(notesDB), (err) => {

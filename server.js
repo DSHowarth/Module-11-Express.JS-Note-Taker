@@ -1,8 +1,11 @@
 const express = require('express');
 const api = require('./routes/api');
 const app = express();
+const path = require('path');
 
 const PORT = process.env.PORT || 3001;
+
+
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -14,7 +17,7 @@ app.use(express.static('public'));
 
 // Notes page route
 app.get('/notes', (req, res) => {
-    res.send(path.join(__dirname, 'notes.html'));
+    res.sendFile(path.join(__dirname, '/public/notes.html'));
 })
 
 app.listen(PORT, (err) => {
