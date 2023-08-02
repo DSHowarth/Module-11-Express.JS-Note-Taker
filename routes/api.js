@@ -29,6 +29,7 @@ apiRoute.post('/', (req, res) => {
     })
 })
 
+// DELETE request removes note from database, targetted by id
 apiRoute.delete('/:delId', (req, res) => {
     fs.readFile('./db/db.json', 'utf8', (err, data) => {
         if (err) {
@@ -37,10 +38,12 @@ apiRoute.delete('/:delId', (req, res) => {
 
         let notesDB = JSON.parse(data);
 
+        //target note object in array
         delIndex = notesDB.findIndex((note) => {
             return note.id === req.params.delId;
         })
 
+        //remove note object
         notesDB.splice(delIndex, 1);
 
         fs.writeFile('./db/db.json', JSON.stringify(notesDB), (err) => {
