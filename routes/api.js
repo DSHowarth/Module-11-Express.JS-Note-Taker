@@ -29,6 +29,24 @@ apiRoute.post('/', (req, res) => {
     })
 })
 
+apiRoute.delete('/:delId', (req, res) => {
+    fs.readFile('./db/db.json', 'utf8', (err, data) => {
+        if (err) {
+            res.json(err);
+        }
 
+        let notesDB = JSON.parse(data);
+
+        delIndex = notesDB.findIndex((note) => {
+            return note.id === req.params.delId;
+        })
+
+        notesDB.splice(delIndex, 1);
+
+        fs.writeFile('./db/db.json', JSON.stringify(notesDB), (err) => {
+            err ? res.json(err) : res.json('Removed note from DB');
+        });
+    })
+})
 
 module.exports = apiRoute;
